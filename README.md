@@ -1,6 +1,6 @@
 # 🎯 AI Aimbot - Counter Strike Source
 
-KI-gestütztes Auto-Aiming System mit YOLO v8 Objekterkennung für CS:Source.
+KI-gestütztes Auto-Aiming System mit YOLO v8 Objekterkennung für FPS Games.
 
 ## 🚀 Schneller Start
 
