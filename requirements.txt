@@ -1,0 +1,42 @@
+# ==================== Core Dependencies ====================
+torch>=2.0.0
+torchvision>=0.15.0
+ultralytics>=8.0.0
+opencv-python>=4.8.0
+numpy>=1.24.0
+Pillow>=10.0.0
+
+# ==================== Screen Capture ====================
+dxcam>=0.4.0                    # Hochperformante Bildschirmaufnahme (Windows)
+mss>=9.0.0                      # Fallback screen capture
+
+# ==================== GPU Support ====================
+# AMD GPU (DirectML)
+torch-directml; platform_system == "Windows"
+torchvision-directml; platform_system == "Windows"
+
+# NVIDIA GPU (CUDA) - Optional, kommentieren Sie aus wenn Sie CUDA verwenden
+# torch-cuda>=2.0.0
+# torchvision-cuda>=0.15.0
+
+# ==================== Windows Utilities ====================
+pywin32>=305                    # Windows API
+pynput>=1.7.6                   # Hotkey-Listener & Maus-Events
+keyboard>=0.13.5                # Alternative Hotkey-Listener
+
+# ==================== GUI (Optional) ====================
+PyQt5>=5.15.0                   # Für GUI
+PyQt5-stubs>=5.15.0
+
+# ==================== Development (Optional) ====================
+# pytest>=7.0.0
+# black>=22.0.0
+# pylint>=2.15.0
+
+# GUI
+PyQt5>=5.15.0
+pynput>=1.7.0  # Global hotkeys
+Pillow>=9.0.0  # Für Bildkonvertierung
+
+# Für bessere Performance
+onnxruntime-directml; platform_system == "Windows"  # Alternative zu torch-directml
