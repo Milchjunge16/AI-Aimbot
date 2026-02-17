@@ -86,3 +86,7 @@ class Config:
     # ==================== HOTKEYS ====================
     toggle_hotkey: str = "f6"
     """Hotkey zum Ein/Ausschalten des Trackings. z.B. 'f6', 'f8', 'space'"""
+    # ==================== DISPLAY / SCREEN ====================
+    display_resolution: Optional[Tuple[int, int]] = None
+    """Optional: Manuell eingestellte Display-Auflösung als (width, height).
+    None = System-Auflösung verwenden (Standard)."""

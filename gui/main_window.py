@@ -346,6 +346,37 @@ class MainWindow(QMainWindow):
         device_layout.addWidget(self.device_combo)
         layout.addLayout(device_layout)
         
+        # Display-Auflösung Auswahl
+        display_layout = QHBoxLayout()
+        display_layout.addWidget(QLabel("Display-Auflösung:"))
+        self.display_combo = QComboBox()
+        self.display_combo.addItems([
+            "Auto (System)",
+            "1920x1080",
+            "2560x1440",
+            "1280x720",
+            "Custom"
+        ])
+        self.display_combo.setToolTip("Wähle die Display-Auflösung, damit die Bildschirmmitte korrekt berechnet wird")
+        display_layout.addWidget(self.display_combo)
+
+        self.display_width_spin = QSpinBox()
+        self.display_width_spin.setRange(100, 10000)
+        self.display_width_spin.setValue(1920)
+        self.display_width_spin.setEnabled(False)
+        display_layout.addWidget(QLabel("W:"))
+        display_layout.addWidget(self.display_width_spin)
+
+        self.display_height_spin = QSpinBox()
+        self.display_height_spin.setRange(100, 10000)
+        self.display_height_spin.setValue(1080)
+        self.display_height_spin.setEnabled(False)
+        display_layout.addWidget(QLabel("H:"))
+        display_layout.addWidget(self.display_height_spin)
+
+        self.display_combo.currentTextChanged.connect(self.toggle_display_selection)
+        layout.addLayout(display_layout)
+        
         # Fenster-Auswahl
         window_group = QGroupBox("Fenster-Auswahl")
         window_layout = QVBoxLayout()
@@ -641,6 +672,12 @@ class MainWindow(QMainWindow):
         self.top_spin.setEnabled(not checked)
         self.right_spin.setEnabled(not checked)
         self.bottom_spin.setEnabled(not checked)
+
+    def toggle_display_selection(self, text: str):
+        """Aktiviert die Custom-Width/Height Eingaben wenn 'Custom' gewählt ist."""
+        is_custom = (text == "Custom")
+        self.display_width_spin.setEnabled(is_custom)
+        self.display_height_spin.setEnabled(is_custom)
         
     def toggle_class_filter(self, checked):
         """Aktiviert/deaktiviert Klassen-Filter."""
@@ -708,6 +745,19 @@ class MainWindow(QMainWindow):
                 self.right_spin.value(),
                 self.bottom_spin.value()
             )
+
+        # Display-Auflösung aus GUI
+        display_text = self.display_combo.currentText()
+        if display_text == "Auto (System)":
+            display_resolution = None
+        elif display_text == "Custom":
+            display_resolution = (self.display_width_spin.value(), self.display_height_spin.value())
+        else:
+            try:
+                w, h = display_text.split('x')
+                display_resolution = (int(w), int(h))
+            except Exception:
+                display_resolution = None
         
         # Strategie
         strategy_map = {
@@ -739,6 +789,7 @@ class MainWindow(QMainWindow):
             log_fps_interval=1.0,
             debug_mode=self.debug_check.isChecked(),
             show_preview=self.preview_check.isChecked(),
+            display_resolution=display_resolution,
             toggle_hotkey=hotkey_map.get(self.hotkey_combo.currentText(), "<f6>")
         )
         

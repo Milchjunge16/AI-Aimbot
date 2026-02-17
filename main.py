@@ -36,10 +36,17 @@ class TrackingSystem:
         self.tracking_enabled = True  # Für Hotkey-Toggle
         self.threads = []
         
-        # Bildschirmgröße ermitteln
+        # Bildschirmgröße ermitteln (System oder vom Benutzer gewählte Auflösung)
         import ctypes
-        self.screen_width = ctypes.windll.user32.GetSystemMetrics(0)
-        self.screen_height = ctypes.windll.user32.GetSystemMetrics(1)
+        sys_w = ctypes.windll.user32.GetSystemMetrics(0)
+        sys_h = ctypes.windll.user32.GetSystemMetrics(1)
+        if getattr(config, 'display_resolution', None):
+            try:
+                self.screen_width, self.screen_height = config.display_resolution
+            except Exception:
+                self.screen_width, self.screen_height = sys_w, sys_h
+        else:
+            self.screen_width, self.screen_height = sys_w, sys_h
         
         # Komponenten initialisieren
         print("\n" + "="*60)

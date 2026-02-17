@@ -21,8 +21,19 @@ class MouseController:
         self.smoothed_y: Optional[float] = None
         
         # Für Bewegungseinschränkungen
-        self.screen_width = ctypes.windll.user32.GetSystemMetrics(0)
-        self.screen_height = ctypes.windll.user32.GetSystemMetrics(1)
+        # Standard: System-Auflösung
+        sys_w = ctypes.windll.user32.GetSystemMetrics(0)
+        sys_h = ctypes.windll.user32.GetSystemMetrics(1)
+
+        # Falls in der Config eine benutzerdefinierte Display-Auflösung gesetzt wurde,
+        # nutze diese Werte (z.B. wenn der User eine andere Anzeigeauflösung auswählt)
+        if hasattr(config, 'display_resolution') and config.display_resolution:
+            try:
+                self.screen_width, self.screen_height = config.display_resolution
+            except Exception:
+                self.screen_width, self.screen_height = sys_w, sys_h
+        else:
+            self.screen_width, self.screen_height = sys_w, sys_h
         
         print(f"🖱️ Maus-Smoothing: {self.alpha} (0 = glatt, 1 = direkt)")
 
