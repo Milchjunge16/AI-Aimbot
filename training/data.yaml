@@ -1,13 +1,17 @@
+
 path: ./dataset  # Dataset Pfad (relativ zum Trainings-Ordner)
 train: images/train
 val: images/val
 test: images/test
 
 # Klassenanzahl und Namen
-nc: 1  # Anzahl der Klassen (ändern Sie dies für mehrere Klassen)
+nc: 3  # Anzahl der Klassen (ändern Sie dies für mehrere Klassen)
 
 # Klassennamen
 names:
-  0: 'target'  # Beispiel: 'target', 'enemy', 'object', etc.
-  # 1: 'second_class'
-  # 2: 'third_class'
+  0: 'ct'
+  1: 't'
+  2: 'head'  
+        # Beispiel: 'target', 'enemy', 'object', etc.
+          # 1: 'second_class'
+          # 2: 'third_class'
