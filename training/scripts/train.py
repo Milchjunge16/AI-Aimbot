@@ -25,9 +25,9 @@ def train_model():
     # Modell laden (pre-trained)
     # Optionen: yolov8n, yolov8s, yolov8m, yolov8l, yolov8x
     # n=nano (schnell), s=small, m=medium, l=large, x=extra large (genau)
-    model = YOLO('yolov8s.pt')
+    model = YOLO('yolov8n.pt')
     
-    print(f"\n📦 Verwende: yolov8s.pt")
+    print(f"\n📦 Verwende: yolov8n.pt")
     print(f"📁 Dataset: {DATA_YAML}")
     print(f"💾 Trainingsergebnisse speichern in: {MODELS_DIR}\n")
     
