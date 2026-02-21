@@ -32,7 +32,7 @@ class Config:
     capture_region: Optional[Tuple[int, int, int, int]] = None
     """Aufnahme-Region als (left, top, right, bottom). None = gesamter Bildschirm"""
     
-    target_fps: int = 60
+    target_fps: int = 30
     """Ziel-FPS für Screen Capture. Höher = bessere Reaktion aber mehr CPU"""
     
     # ==================== TARGET SELECTION ====================

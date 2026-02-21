@@ -413,7 +413,7 @@ class MainWindow(QMainWindow):
         fps_layout.addWidget(QLabel("Ziel FPS:"))
         self.fps_spin = QSpinBox()
         self.fps_spin.setRange(15, 240)
-        self.fps_spin.setValue(60)
+        self.fps_spin.setValue(30)
         fps_layout.addWidget(self.fps_spin)
         layout.addLayout(fps_layout)
         
